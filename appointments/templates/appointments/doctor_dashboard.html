@@ -1,0 +1,13 @@
+<h1>Welcome, Dr. {{ doctor.user.first_name }}!</h1>
+<h2>Your Appointments</h2>
+<ul>
+    {% for appointment in appointments %}
+        <li>{{ appointment.patient.user.first_name }} on {{ appointment.appointment_date }} - Reason: {{ appointment.reason }}</li>
+    {% empty %}
+        <li>No appointments</li>
+    {% endfor %}
+    <form method="POST" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+</ul>

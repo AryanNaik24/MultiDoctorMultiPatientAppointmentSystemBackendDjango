@@ -1,0 +1,7 @@
+<h1>Patient Registration</h1>
+<form method="POST">
+    {% csrf_token %}
+    {{ user_form.as_p }}
+    {{ patient_form.as_p }}
+    <button type="submit">Register</button>
+</form>

@@ -1,0 +1,35 @@
+<h1>Welcome, {{ patient.user.first_name }}!</h1>
+
+<h2>Your Appointments</h2>
+<ul>
+    {% for appointment in appointments %}
+        <li>With Dr. {{ appointment.doctor.user.last_name }} on {{ appointment.appointment_date }} - Reason: {{ appointment.reason }}</li>
+    {% empty %}
+        <li>No appointments</li>
+    {% endfor %}
+</ul>
+
+<h2>Available Doctors</h2>
+<ul>
+    {% for doctor in doctors %}
+        <li>
+            Dr. {{ doctor.user.first_name }} {{ doctor.user.last_name }} - {{ doctor.specialty }}
+            <!-- Booking Form -->
+            <form method="POST" action="{% url 'book_appointment' doctor.id %}">
+                {% csrf_token %}
+                <label for="appointment_date_{{ doctor.id }}">Date & Time</label>
+                <input type="datetime-local" id="appointment_date_{{ doctor.id }}" name="appointment_date" required>
+                
+                <label for="reason_{{ doctor.id }}">Reason</label>
+                <textarea id="reason_{{ doctor.id }}" name="reason" required></textarea>
+                
+                <button type="submit">Book Appointment</button>
+            </form>
+        </li>
+
+    {% endfor %}
+    <form method="POST" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+</ul>

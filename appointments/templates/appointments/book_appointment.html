@@ -1,0 +1,10 @@
+<h1>Book an Appointment with Dr. {{ doctor.user.first_name }}</h1>
+<form method="POST">
+    {% csrf_token %}
+    <label for="appointment_date">Date & Time</label>
+    <input type="datetime-local" id="appointment_date" name="appointment_date" required>
+    <label for="reason">Reason</label>
+    <textarea id="reason" name="reason" required></textarea>
+    <button type="submit">Book Appointment</button>
+</form>
+
